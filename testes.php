@@ -19,7 +19,9 @@ $app = new uni();
 echo "<br>----------------- GERAL --------------------<br>";
 
 $cpf = "008.234.100-07";
- echo (int)$cpf;
+echo (int)str_replace(array('.','-'), '', $cpf);
+ 
+ 
 
 
 //TESTADOR DE QUERIES
