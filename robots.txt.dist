@@ -1,0 +1,24 @@
+# If the UNI system is installed within a folder such as at
+# e.g. www.example.com/uni/ the robots.txt file MUST be
+# moved to the site root at e.g. www.example.com/robots.txt
+# AND the uni folder name MUST be prefixed to the disallowed
+# path, e.g. the Disallow rule for the /administrador/ folder
+# MUST be changed to read Disallow: /uni/administrator/
+#
+# For more information about the robots.txt standard, see:
+# http://www.robotstxt.org/orig.html
+#
+# For syntax checking, see:
+# http://tool.motoricerca.info/robots-checker.phtml
+
+User-agent: *
+Disallow: /administrador/
+Disallow: /componentes/
+Disallow: /configs/
+Disallow: /framework/
+Disallow: /installation/
+Disallow: /bibliotecas/
+Disallow: /logs/
+Disallow: /images/
+Disallow: /public/
+

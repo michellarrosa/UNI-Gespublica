@@ -1,0 +1,30 @@
+﻿<html>
+<head>
+<script>
+function modMaze(idComponente, idModulo, dados, idLocal) {
+	var xhttp;
+	if (window.XMLHttpRequest){xhttp = new XMLHttpRequest();} 
+	else {	xhttp = new ActiveXObject("Microsoft.XMLHTTP");	}
+	// xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+		  //ao caso receba o obj
+		  document.getElementById(idLocal).innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("POST", "http://localhost/Projects/UNI/public/publicFunction.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("componente="+idComponente+"&modulo="+idModulo+"&dados="+dados);
+}
+
+function testemodMaze(idComponente, idModulo, dados, idLocal){
+	var str = "componente="+idComponente+"&modulo="+idModulo+"&dados="+dados+"&local="+idLocal;
+	document.getElementById(idLocal).innerHTML = str;
+}
+</script>
+
+</head>
+<body onload="modMaze('licam', 'atividade_codigos', '', 'codAtividade')">
+<div id="codAtividade"></div>
+</body>
+</html>
