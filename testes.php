@@ -13,16 +13,10 @@ require_once UNIPATH_BASE . '/framework/defines.php';
 require_once UNIPATH_BASE . '/framework/framework.php';
 $app = new uni();
 
-
-
-
 echo "<br>----------------- GERAL --------------------<br>";
 
 $cpf = "008.234.100-07";
 echo (int)str_replace(array('.','-'), '', $cpf);
- 
- 
-
 
 //TESTADOR DE QUERIES
 $query="select * from com_licam.empreendimentodata where id = 1";
@@ -58,6 +52,5 @@ print_r( MENU );
 print_r( USER );
 print_r($app->Modulos());
 echo "</pre>";
-
 
 ?>
