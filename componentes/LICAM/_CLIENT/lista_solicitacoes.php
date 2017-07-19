@@ -39,14 +39,12 @@ $modReturn ="
 					<th class='text-center'>Impressão</th>	
 					<th class='text-center'>Editar Formulário</th>
 					<th class='text-center'>Última Modificação</th>					
-				
 				</tr>
 			</thead>
 			<tbody>
 			$conteudoBody
 			</tbody>
 		</table>
-
 ";
 echo $modReturn;
 

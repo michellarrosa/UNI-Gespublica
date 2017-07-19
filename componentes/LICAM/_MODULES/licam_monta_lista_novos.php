@@ -19,7 +19,6 @@ foreach($listadeprocessos as $key=>$value){
 					</tr>";
 } 
 // FIM TRATAMENTO DAS VARIÁVEIS
-
 $modReturn ="
 	<html>
 		<div id='conteudo'>
