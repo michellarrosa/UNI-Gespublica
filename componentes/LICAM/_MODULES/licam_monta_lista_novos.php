@@ -18,6 +18,7 @@ foreach($listadeprocessos as $key=>$value){
 						<td>".$value['tipolicenca']."</td>
 					</tr>";
 } 
+
 // FIM TRATAMENTO DAS VARIÁVEIS
 $modReturn ="
 	<html>
@@ -29,30 +30,30 @@ $modReturn ="
 					</div>
 					<!-- /.box-header -->
 				<div class='box-body'>
-             <table id='example1' class='table table-bordered table-striped'>
-                <thead>
-                <tr>
-                  <th>Protocolo</th>
-                  <th>Razão social</th>
-                  <th>Empreendedor</th>
-                  <th>Licença Solicitada</th>
-                </tr>
-                </thead>
-								
-                <tbody>
-								
-                ".$conteudoBody."
-								
-								</tbody>
-								
-                <tfoot>
-                <tr>
-                 <th>Protocolo</th>
-                  <th>Razão social</th>
-                  <th>Empreendedor</th>
-                  <th>Licença Solicitada</th>
-                </tr>
-                </tfoot>
+				<table id='example1' class='table table-bordered table-striped'>
+					<thead>
+					<tr>
+					  <th>Protocolo</th>
+					  <th>Razão social</th>
+					  <th>Empreendedor</th>
+					  <th>Licença Solicitada</th>
+					</tr>
+					</thead>
+									
+					<tbody>
+									
+					".$conteudoBody."
+									
+									</tbody>
+									
+					<tfoot>
+					<tr>
+					 <th>Protocolo</th>
+					  <th>Razão social</th>
+					  <th>Empreendedor</th>
+					  <th>Licença Solicitada</th>
+					</tr>
+					</tfoot>
               </table>
             </div>
             <!-- /.box-body -->
