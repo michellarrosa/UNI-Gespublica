@@ -90,7 +90,7 @@ Class uniData{
 						ob_start();
 						// Imprime a página, mas ela não irá aparecer, porque será guardada no buffer.
 						require($scriptFile);
-						// Pega a guardada pelo buffer e salva na variável "$modReturn".
+						// Pega a guardada pelo buffer e salva na variável "$scriptReturn".
 						$scriptReturn = ob_get_contents();
 						// Limpa o buffer.
 						ob_end_clean();

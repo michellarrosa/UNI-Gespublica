@@ -9,14 +9,14 @@ $conteudoBody = "";
 $rodape = "rodape estilo com variável";
 
 $listadeprocessos = $this->execQuery("SELECT * FROM com_licam.empreendimentodata")[result];
-
+$ano = new Datetime($value['time_criacao']);
 foreach($listadeprocessos as $key=>$value){
-	$conteudoBody.="<tr>
-								<td><a href='./?menu=6&p=".$value['id']."'>SIGMA-".sprintf("%03d",$value['id'])."-2017</a></td>
-								<td>".$value['emp_razaosocial']."</td>
-								<td>".$value['empreendedor_nome']."</td>
-								<td>".$value['tipolicenca']."</td>
-							</tr>";
+	$conteudoBody.=	"<tr>
+						<td><a href='./?menu=6&p=".$value['id']."'>SIGMA-".sprintf("%03d",$value['id'])."-".$ano->format('Y')."</a></td>
+						<td>".$value['emp_razaosocial']."</td>
+						<td>".$value['empreendedor_nome']."</td>
+						<td>".$value['tipolicenca']."</td>
+					</tr>";
 } 
 // FIM TRATAMENTO DAS VARIÁVEIS
 

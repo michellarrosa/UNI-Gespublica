@@ -22,7 +22,7 @@ Class uni extends uniData{
 			if($sessionid){
 				$session = $this->execQuery("SELECT sessiondatetime FROM ". UConfig::$UDB_Prefixo ."contadeusuario WHERE sessionid='$sessionid'");
 				if($session['numRows'] == 1){
-					$hatual = new Datetime(date("Y/m/d H:i:s"));
+					$hatual = new Datetime(date("Y-m-d H:i:s"));
 					$sessionDateTime = new Datetime($session["result"][0]["sessiondatetime"]);
 					if(date_diff($hatual, $sessionDateTime)-> h <= 1){
 						return 1;

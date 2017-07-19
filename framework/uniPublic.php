@@ -18,18 +18,18 @@ Class uniPublic extends uniData{
 	function loginExternalUser($email, $password){
 		$mail = $this->execQuery("SELECT id FROM ". UConfig::$UDB_Prefixo ."contadeusuario_externo WHERE email='".$email."'");
 		if($mail['status']){
-			if($mail['numRows']!=1){
-				$execLogin = $this->execQuery("SELECT id FROM ". UConfig::$UDB_Prefixo ."contadeusuario_externo WHERE id='".$email['result'][0]['id']."' AND password='".hash(UConfig::$UHash_algo, $password)."'");
+			if($mail['numRows']==1){
+				$execLogin = $this->execQuery("SELECT id FROM ". UConfig::$UDB_Prefixo ."contadeusuario_externo WHERE id='".$mail['result'][0]['id']."' AND password='".hash(UConfig::$UHash_algo, $password)."'");
 				if($execLogin['status']){
 					if($execLogin['numRows'] == 1){
 						$id = $execLogin["result"][0]["id"];
 						$sessionid = hash(hash_algos()[mt_rand(0, 45)], mt_rand());
 						$this->execQuery("UPDATE ". UConfig::$UDB_Prefixo ."contadeusuario_externo SET sessionid = '$sessionid' , sessiondatetime = now() WHERE id=$id");
-						return $sessionid; //ok
-					}else{return array("status"=>FALSE, "message"=>"Erro00")} //senha ou email incorretos
-				}else{return array("status"=>FALSE, "message"=>"Erro02")} //erro interno
-			}else{return array("status"=>FALSE, "message"=>"email")} //email não cadastrado
-		}else{return array("status"=>FALSE, "message"=>"Erro01")} //erro interno
+						return array("status"=>TRUE,"message"=>"success","session"=>$sessionid); //ok
+					}else{return array("status"=>FALSE,"message"=>"Erro00");} //senha ou email incorretos
+				}else{return array("status"=>FALSE,"message"=>"Erro02");} //erro interno
+			}else{return array("status"=>FALSE,"message"=>"email");} //email não cadastrado
+		}else{return array("status"=>FALSE,"message"=>"Erro01");} //erro interno
 	}
 	
 	function logoutExternalUser(){
@@ -70,6 +70,7 @@ Class uniPublic extends uniData{
 			}else{ return array("status"=> FALSE, "message"=> 'Erro:04'); } // :parâmetros inválidos
 		}else{ return array("status"=> FALSE, "message"=> 'Erro:05'); } // :faltam parâmetros
 	}
+	
 	function createExternalUserCompleto($nome, $CPF, $senha, $email, $rg, $nascimento, $empresa, $profissao, $end_cep, $end_estado, $end_cidade, $end_bairro, $end_rua, $end_num, $end_compl, $telefone){
 		if(isset($email) AND isset($senha) AND isset($CPF) AND isset($nome)){
 			if(is_string($email) AND is_string($senha) AND is_string($CPF) AND is_string($nome)){
@@ -89,6 +90,7 @@ Class uniPublic extends uniData{
 			}else{ return array("status"=> FALSE, "message"=> 'Erro:04'); } // :parâmetros inválidos
 		}else{ return array("status"=> FALSE, "message"=> 'Erro:05'); } // :faltam parâmetros
 	}
+	
 	function updateExternalUser($CPF, $senha, $novaSenha){
 		if(isset($senha) AND isset($CPF)){
 			if(is_string($senha) AND is_string($CPF)){

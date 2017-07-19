@@ -13,6 +13,11 @@ $value = str_replace(')',"",$value);
 $result['emp_coord'] = $value;
 
 
+if(isset($result['atividade_dataini'])){
+	$atividade_dataini = new Datetime( $result['atividade_dataini']); // o DateTimeZone eh o padrao do PGSQL
+	$result['atividade_dataini'] = $atividade_dataini->format("d/m/Y");
+}
+
 if(($result['tipolicenca'] == "LU") || ($result['tipolicenca'] == "RLU" )){
    $result['num_licenca'] = "2";
 }elseif($result['tipolicenca'] == "LF"){
@@ -23,13 +28,10 @@ if(($result['tipolicenca'] == "LU") || ($result['tipolicenca'] == "RLU" )){
   $result['num_licenca'] = "3";
 }
 
-
 foreach($result as $key =>$value){
-	
 	if(!isset($result[$key])){
 		unset($result[$key]);
 	}else{
-
 		if(($key = array_search('Total', $result)) == 'Total') {
 			$result[$key] = "Total";
 		}
@@ -37,7 +39,6 @@ foreach($result as $key =>$value){
 			$result[$key] = "Parcial";
 		}
 	}
-
 }
 	
 	
