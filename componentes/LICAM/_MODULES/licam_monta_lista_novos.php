@@ -28,41 +28,35 @@ $modReturn ="
 					<div class='box-header'>
 					  <h3 class='box-title'>".$tituloModulo."</h3>
 					</div>
-				<div class='box-body'>
-				<table id='example1' class='table table-bordered table-striped'>
-					<thead>
-					<tr>
-					  <th>Protocolo</th>
-					  <th>Razão social</th>
-					  <th>Empreendedor</th>
-					  <th>Licença Solicitada</th>
-					</tr>
-					</thead>
-									
-					<tbody>
-									
-					".$conteudoBody."
-									
-									</tbody>
-									
-					<tfoot>
-					<tr>
-					 <th>Protocolo</th>
-					  <th>Razão social</th>
-					  <th>Empreendedor</th>
-					  <th>Licença Solicitada</th>
-					</tr>
-					</tfoot>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-		  
+					<div class='box-body'>
+						<table id='example1' class='table table-bordered table-striped'>
+							<thead>
+							<tr>
+								<th>Protocolo</th>
+								<th>Razão social</th>
+								<th>Empreendedor</th>
+								<th>Licença Solicitada</th>
+							</tr>
+							</thead>
+							
+							<tbody>	
+								".$conteudoBody."
+							</tbody>
+											
+							<tfoot>
+							<tr>
+								<th>Protocolo</th>
+								<th>Razão social</th>
+								<th>Empreendedor</th>
+								<th>Licença Solicitada</th>
+							</tr>
+							</tfoot>
+						</table>
+					</div>
 				</div>
-				
-			</div><!-- /#conteudo -->
-		</html>
-			";
+			</div>	
+		</div><!-- /#conteudo -->
+	</html>
+";
 echo utf8_decode($modReturn);
 ?>

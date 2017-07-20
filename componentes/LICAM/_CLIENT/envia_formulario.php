@@ -69,11 +69,6 @@ $quadrantenao_obrigatorio = array(
 	"item"=>"<strong><BR>10. Efluentes líquidos industriais: </strong>"
 ),
 
-"agua_consumo"=>array(
-	"agua_outro"=>array("agua_outro_especificar"=>"Descrição do tipo de abastecimento"),
-	"item"=>"<strong><BR>8. Informações sobre o consumo de água </strong>"
-),
-
 
 "prestacao_servico"=>array(
 	"prestacao_descricao"=>"Descrição das etapas do processo produtivo industrial",
@@ -105,7 +100,14 @@ $quadrantenao_obrigatorio = array(
 	"atividade_horainicio"=>"Horário de início do expediênte",
 	"atividade_dataini"=>"Data de início da atividade",
 	"item"=>"<strong><br>5. Informações sobre o funcionamento: </strong>"
-));
+)
+,
+
+"agua_consumo"=>array(
+	"agua_outro"=>array("agua_outro_especificar"=>"Descrição do tipo de abastecimento"),
+	"item"=>"<strong><BR>8. Informações sobre o consumo de água </strong>"
+)
+);
 
 
 $itens = array();
@@ -115,7 +117,7 @@ foreach($quadrantenao_obrigatorio as $key=>$value){
 	if(isset($licform[$key]) && $licform[$key] == "TRUE"){
 		foreach($value as $id => $conteudo){
 			
-			if(is_array($conteudo)){ //caso seja um vetor de itens
+			if(is_array($conteudo) && isset($licform[$id])){ //caso seja um vetor de itens
 				foreach ($conteudo as $indice => $val) {
 					if($indice == "item"){
 						if($flag == 1){
