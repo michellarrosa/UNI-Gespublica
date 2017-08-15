@@ -43,7 +43,7 @@ $warning = 	(	empty($warning)? "":
 					<br><a href='./'>Analise a documentação</a>
 				</div>"
 			);
-$conteudoHeader = "Alteração de senhas de cidadãos/cidadãs cadastrados(as) externamente";
+$conteudoHeader = "Alteração de senhas de cidadãos/cidadãs cadastrados(as) externamente ";
 $conteudoBody="
 	<form class='form-horizontal' id='renewsenha' action='./' method='post'>
 		<input type='hidden' name='menu' value='13'>

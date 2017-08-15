@@ -1,6 +1,6 @@
 ﻿<?php
 	// header('Content-Type: text/html; charset=UTF-8');
-	$sql = 'SELECT * FROM com_licam.atividades_tabela';
+	$sql = 'SELECT * FROM uni__licam_atividades_tabela';
 	$result = $this->execQuery($sql)['result'];
 	$modReturn=array();
 	foreach ($result as $key => $campo) {

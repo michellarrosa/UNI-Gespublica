@@ -15,7 +15,7 @@ $section = explode("/", $_POST['dados']);
 		$table_name="prestacao_tabela";
 	}
 
-	$query = "SELECT ".$table_name." FROM com_licam.empreendimentodata WHERE id = '". $section[1]."'";
+	$query = "SELECT ".$table_name." FROM uni__licam_empreendimentodata WHERE id = '". $section[1]."'";
 
 	$result = $this->execQuery($query)['result'][0];
 	function multiploexplode ($delimiters,$string) {

@@ -33,7 +33,8 @@ Class uniPublic extends uniData{
 	}
 	
 	function logoutExternalUser(){
-		$this->execQuery("UPDATE ". UConfig::$UDB_Prefixo ."contadeusuarioexterno SET session = '' , sessiondatetime = now() WHERE session = '". $_COOKIE['unidan'] ."'");
+		$this->execQuery("UPDATE ". UConfig::$UDB_Prefixo ."contadeusuarioexterno SET session = '' , sessiondatetime = now() WHERE session = '". $_SESSION['session_ext'] ."'");
+		unset($_SESSION['session_ext']);
 	}
 
 	function verificaExternalUser($sessionid){

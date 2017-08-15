@@ -4,7 +4,7 @@ session_start();
 
 $form_togo = $_POST['dados'];
 
-$query = "SELECT * FROM com_licam.empreendimentodata WHERE id = $form_togo";
+$query = "SELECT * FROM uni__licam_empreendimentodata WHERE id = $form_togo";
 $result = $this->execQuery($query)['result'][0];
 
 $value= $result['emp_coord'];

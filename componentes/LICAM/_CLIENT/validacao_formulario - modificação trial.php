@@ -1,7 +1,7 @@
 <?php
 
 	$form = $_POST['dados'];
-	$query = "SELECT * FROM com_licam.empreendimentodata WHERE id = $form";
+	$query = "SELECT * FROM uni__licam_empreendimentodata WHERE id = $form";
 	$result = $this->execQuery($query)['result'][0];	
 	$validacao = array();
 	

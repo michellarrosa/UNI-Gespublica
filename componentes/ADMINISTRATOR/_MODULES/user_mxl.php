@@ -11,7 +11,7 @@ $rodape = "rodape estilo com variável";
 $contasdeusuario = $this->execQuery("SELECT * FROM ". UConfig::$UDB_Prefixo ."contadeusuario")[result];
 
 foreach($contasdeusuario as $key=>$value){
-	$conteudoBody.="<tr> 
+	$conteudoBody .=	"<tr> 
 						<td>".$value['nome']."</td>
 						<td>".$value['email']."</td>
 						<td>".$value['cpf']."</td>
@@ -20,7 +20,6 @@ foreach($contasdeusuario as $key=>$value){
 						<td>Apagar </td>
 					</tr>";
 } 
-// FIM TRATAMENTO DAS VARIÁVEIS
 // FIM TRATAMENTO DAS VARIÁVEIS
 
 $modReturn ="
@@ -51,14 +50,14 @@ $modReturn ="
 					
 					."</div>
 				</div>
-				<div class="box box-default collapsed-box">
-					<div class="box-header with-border">
-						<h3 class="box-title">Expandable</h3>
-						<div class="box-tools pull-right">
-							<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+				<div class='box box-default collapsed-box'>
+					<div class='box-header with-border'>
+						<h3 class='box-title'>Expandable</h3>
+						<div class='box-tools pull-right'>
+							<button class='btn btn-box-tool' data-widget='collapse'><i class='fa fa-plus'></i></button>
 						</div><!-- /.box-tools -->
 					</div><!-- /.box-header -->
-					<div class="box-body">
+					<div class='box-body'>
 						<input><input>
 					</div><!-- /.box-body -->
 				</div><!-- /.box -->

@@ -192,7 +192,8 @@
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0.12
+        <b>Version: </b> UNI 1.0.12
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />.
     </div>
     <strong>Copyright &copy; 2016-2017 <a href="http://websailor.com.br"> Websailor &reg; </a> . </strong> All rights reserved.
   </footer>

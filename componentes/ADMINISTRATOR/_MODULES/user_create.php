@@ -4,9 +4,7 @@ ini_set('default_charset','UTF-8');
 //PROCESSAMENTO CARREGADO
 
 	if(isset($_POST['createInputNome'], $_POST['createInputCPF'], $_POST['createInputEmail'], $_POST['createInputPassword'], $_POST['createInputPasswordConfirm'], $_POST['createInputACL'], $_POST['createInputCategoria']) && !empty($_POST['createInputNome']) && !empty($_POST['createInputCPF']) && !empty($_POST['createInputEmail']) && !empty($_POST['createInputPassword']) && !empty($_POST['createInputPasswordConfirm'])&& !empty($_POST['createInputACL'])&& !empty($_POST['createInputCategoria'])){
-		
-		
-		
+	
 		// if(isset($_FILES))	{
 			
 			// $uploaddir = './imagens/profile/';

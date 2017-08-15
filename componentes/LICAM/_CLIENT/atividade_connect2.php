@@ -1,12 +1,11 @@
 ﻿<?php
-
 	$q = $_POST['dados']; //pego o numero que o user digitou
 	if($q > 0){
 			$q = $_POST['dados']; //tamanho
 			$valor = $_POST['valor']; // select
 			$potencial = $_POST['potencial']; //potencial
 			
-			$sql="SELECT minimo_inferior, minimo_superior, pequeno_inferior, pequeno_superior, medio_inferior, medio_superior, grande_inferior, grande_superior, ex_inferior, ex_superior FROM com_licam.atividades_tabela WHERE id = '".$valor."'";
+			$sql="SELECT minimo_inferior, minimo_superior, pequeno_inferior, pequeno_superior, medio_inferior, medio_superior, grande_inferior, grande_superior, ex_inferior, ex_superior FROM uni__licam_atividades_tabela WHERE id = '".$valor."'";
 			$result = $this->execQuery($sql)['result'];
 			// $row = $result[0]['minimo_superior'];
 			// $row2 = $result[0]['minimo_inferior'];
@@ -76,10 +75,4 @@
 		echo $row;
 		exit();
 	}
-
-
-
-
-
-
 ?>

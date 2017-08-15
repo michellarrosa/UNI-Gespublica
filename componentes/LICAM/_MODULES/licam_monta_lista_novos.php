@@ -8,7 +8,7 @@ $tituloModulo = "Processos Aguardando Despacho";
 $conteudoBody = "";
 $rodape = "rodape estilo com variável";
 
-$listadeprocessos = $this->execQuery("SELECT * FROM com_licam.empreendimentodata")[result];
+$listadeprocessos = $this->execQuery("SELECT * FROM uni__licam_empreendimentodata")[result];
 $ano = new Datetime($value['time_criacao']);
 foreach($listadeprocessos as $key=>$value){
 	$conteudoBody.=	"<tr>

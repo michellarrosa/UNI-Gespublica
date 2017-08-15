@@ -10,7 +10,7 @@
 	$senha = array_pop($_POST); //executado duas vezes
 	if( $senha == array_pop($_POST) ){
 		$form_cadastro = array_merge($form_cadastro, $_POST);
-		$verifica_conta = "SELECT * FROM uni.contadeusuario_externo WHERE cpf='".$form_cadastro['cpf']."'";
+		$verifica_conta = "SELECT * FROM uni_contadeusuario_externo WHERE cpf='".$form_cadastro['cpf']."'";
 		$verifica = $this->execQuery($verifica_conta)['numRows'];
 		if($verifica > 0){
 			$message = "cpf";	// CPF já cadastrado.

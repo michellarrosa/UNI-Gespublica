@@ -35,7 +35,7 @@ if($atividade_tamanho > 0){
          } 
       }
    }
-   $sql="SELECT minimo_inferior, minimo_superior, pequeno_inferior, pequeno_superior, medio_inferior, medio_superior, grande_inferior, grande_superior, ex_inferior, ex_superior FROM com_licam.atividades_tabela WHERE codramo = '".$codigo_atividade."'";
+   $sql="SELECT minimo_inferior, minimo_superior, pequeno_inferior, pequeno_superior, medio_inferior, medio_superior, grande_inferior, grande_superior, ex_inferior, ex_superior FROM uni__licam_atividades_tabela WHERE codramo = '".$codigo_atividade."'";
    $result = $this->execQuery($sql)['result'];
    $min_sup=  $result[0]['minimo_superior'];
    $min_inf =$result[0]['minimo_inferior'];

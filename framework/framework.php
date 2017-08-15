@@ -17,6 +17,8 @@ ini_set('default_charset','UTF-8');
 
 mb_internal_encoding('UTF-8');
 
+session_start();
+
 require_once UNIPATH_CONFIGURATION . '/Unfigurations.php';
 
 date_default_timezone_set ( 'America/Sao_Paulo' );
@@ -26,3 +28,4 @@ require_once('uniData.php');
 require_once('uni.php');
 
 require_once UNIPATH_CONFIGURATION . '/Unvironment.php';
+

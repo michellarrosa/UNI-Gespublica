@@ -20,7 +20,7 @@
 		}
 	}
 	
-	$envia_mensagem = "INSERT INTO com_licam.mensagens(" . implode(',', $campos) . ") VALUES (" . implode(',', $valores) . ")";
+	$envia_mensagem = "INSERT INTO uni__licam_mensagens(" . implode(',', $campos) . ") VALUES (" . implode(',', $valores) . ")";
 	$result = $this->execQuery($envia_mensagem)['status'];
 	
 	if($result == 1){

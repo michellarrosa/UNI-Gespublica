@@ -18,6 +18,7 @@ Class uniData{
 	public $db_port;
 	public $db_dsn;
 	public $db_charset;
+	private $db_connect;
 
 	public function __construct(){
 		$this->db_sgdb = Uconfig::$conn_sgdb;
@@ -27,8 +28,12 @@ Class uniData{
 		$this->db_user = Uconfig::$conn_user;
 		$this->db_password = Uconfig::$conn_password;
 		$this->db_charset = "utf8mb4";
-		$this->db_dsn = "$this->db_sgdb:dbname=$this->db_chosen;host=$this->db_host;port=$this->db_port";
-		// $this->db_options = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
+		$this->db_dsn="$this->db_sgdb:dbname=$this->db_chosen;host=$this->db_host;port=$this->db_port"; //funciona com pgsql e mysql
+		
+		if($this->db_sgdb=="mysql"){$this->db_options=array(PDO::MYSQL_ATTR_INIT_COMMAND=>"SET NAMES utf8");}
+		
+		/*CRIAR $connect = new PDO($this->db_dsn, $this->db_user, $this->db_password, $this->db_options);	*/
+		/* AQUI, ANTES DA FUNÇÃO EXECQUERY*/
 	}
 	
 	// FUNÇÕES CÓPIA DA PRATFORMA WEBSAILOR
@@ -37,11 +42,11 @@ Class uniData{
 		if(isset($query)){
 			if(is_string($query) && !empty($query)){
 				try{
-					$connect = new PDO($this->db_dsn, $this->db_user, $this->db_password);
+					$connect = new PDO($this->db_dsn, $this->db_user, $this->db_password, $this->db_options);
 					if(!$connect){
 						throw new PDOException();
 					}else{
-						$result_o= $connect->query($query);
+						$result_o = $connect->query($query);
 						if($result_o){
 							$result= $result_o->fetchAll(PDO::FETCH_ASSOC);
 							return array("status"=>1, "result"=>$result, "numRows"=>count($result),"message"=>"$query");	
@@ -49,13 +54,9 @@ Class uniData{
 							return array("status"=>0, "result"=>NULL, "numRows"=>0,"message"=>"$query");
 						}
 					}	
-				}catch(PDOException $e){
-					return array("status"=>0, "result"=>NULL, "numRows"=>0,"message"=>$e->getMessage());
-				}
-			}else{
-				return array("status"=>0, "result"=>NULL, "numRows"=>0,"message"=>"Query vazio ou datatype diferente.");	}
-		}else{
-			return array("status"=>0, "result"=>NULL, "numRows"=>0,"message"=>"Falta parâmetro Query.");	}
+				}catch(PDOException $e){return array("status"=>0, "result"=>NULL, "numRows"=>0,"message"=>$e->getMessage());}
+			}else{return array("status"=>0, "result"=>NULL, "numRows"=>0,"message"=>"Query vazio ou datatype diferente.");	}
+		}else{return array("status"=>0, "result"=>NULL, "numRows"=>0,"message"=>"Falta parâmetro Query.");}
 	}
 	
 	public function modMaze($componente, $level, $modulo){

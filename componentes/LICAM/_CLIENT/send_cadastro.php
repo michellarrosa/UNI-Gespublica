@@ -18,12 +18,12 @@
 						if($verify_format['status']){
 					
 				
-								$verifica_sql = "SELECT * FROM com_licam.perfildeusuario WHERE cpf='".$cpf."'";
+								$verifica_sql = "SELECT * FROM uni__licam_perfildeusuario WHERE cpf='".$cpf."'";
 								$verifica = $this->execQuery($verifica_sql)['numRows'];
 								if($verifica == 0){
 									$result = $this->createExternalUser($nome,$cpf,$senha,$email);
 									if($result['status']){
-										$sql = "INSERT INTO com_licam.perfildeusuario(cpf, nome, end_estado, end_cidade, end_cep, end_rua, end_num, end_compl, end_bairro, email, telefone, rg, empresa, profissao, nascimento) VALUES ('$cpf','$nome','$end_estado','$end_cidade','$end_cep','$end_rua','$end_num','$end_compl','$end_bairro','$email','$telefone','$rg','$empresa','$profissao','$nascimento');";
+										$sql = "INSERT INTO uni__licam_perfildeusuario(cpf, nome, end_estado, end_cidade, end_cep, end_rua, end_num, end_compl, end_bairro, email, telefone, rg, empresa, profissao, nascimento) VALUES ('$cpf','$nome','$end_estado','$end_cidade','$end_cep','$end_rua','$end_num','$end_compl','$end_bairro','$email','$telefone','$rg','$empresa','$profissao','$nascimento');";
 										$result = $this->execQuery($sql)['status'];
 										if($result == 1){
 											$message = "ok";

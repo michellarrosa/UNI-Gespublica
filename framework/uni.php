@@ -17,8 +17,10 @@ Class uni extends uniData{
 	}
 	
 	function verificaLoginOnLine(){
-		if(isset($_COOKIE['unidan'])){
-			$sessionid = addslashes($_COOKIE['unidan']);
+		// if(isset($_COOKIE['unidan'])){
+		if(isset($_SESSION['SESSION'])){
+			// $sessionid = addslashes($_COOKIE['unidan']);
+			$sessionid = $_SESSION['SESSION'];
 			if($sessionid){
 				$session = $this->execQuery("SELECT sessiondatetime FROM ". UConfig::$UDB_Prefixo ."contadeusuario WHERE sessionid='$sessionid'");
 				if($session['numRows'] == 1){
@@ -36,13 +38,11 @@ Class uni extends uniData{
 	function Menu(){
 		if($this->verificaLoginOnLine()){
 			$menu = array();
-			//a opção de conexoes alternadas em loop caiu-por-terra na analise assintótica //M F-N-M DQ F F M
-			
-			$areas = json_decode($this->execQuery("
-			SELECT areas FROM ". UConfig::$UDB_Prefixo ."acl as acl WHERE id = ( SELECT ACL from ". UConfig::$UDB_Prefixo ."contadeusuario 	WHERE sessionid = '". addslashes($_COOKIE['unidan']) ."')")['result'][0]['areas']);
+			$q="	SELECT areas FROM ". UConfig::$UDB_Prefixo ."acl as acl WHERE id = ( SELECT ACL from ". UConfig::$UDB_Prefixo ."contadeusuario WHERE sessionid = '". $_SESSION['SESSION'] ."')";
+			$areas = json_decode($this->execQuery($q)['result'][0]['areas']);
 			
 			foreach($areas as $key => $value){
-				$areaComponente[] = $this->execQuery("SELECT c.nome as componente, m.id as menu, m.nome as pagina, m.titulo as titulo FROM ". UConfig::$UDB_Prefixo ."componentes as c, ". UConfig::$UDB_Prefixo ."menus as m WHERE c.areas=$value AND m.componente=c.id  AND m.nivel=".USER['nivel']." ORDER BY menu")['result'];
+				$areaComponente[] = $this->execQuery("SELECT c.nome as componente, m.id as menu, m.nome as pagina, m.titulo as titulo FROM ". UConfig::$UDB_Prefixo ."componentes as c, ". UConfig::$UDB_Prefixo ."menus as m WHERE c.areas=$value AND m.componente=c.id  AND m.nivel=".$_SESSION['USER']['nivel']." ORDER BY menu")['result'];
 			}
 			foreach($areaComponente as $key => $componenteMenu){
 				foreach($componenteMenu as $key => $value){
@@ -55,7 +55,7 @@ Class uni extends uniData{
 	
 	function Modulos(){
 		if($this->verificaLoginOnLine()){
-			$modulos = $this->execQuery("SELECT m.id, m.modulo, p.posicao FROM ". UConfig::$UDB_Prefixo ."modulos as m, ". UConfig::$UDB_Prefixo ."posicoes as p WHERE m.nivel = ". USER['nivel'] ." AND p.id = m.posicao AND m.menu = ". MENU['id'] ."")['result'];
+			$modulos = $this->execQuery("SELECT m.id, m.modulo, p.posicao FROM ". UConfig::$UDB_Prefixo ."modulos as m, ". UConfig::$UDB_Prefixo ."posicoes as p WHERE m.nivel = ". $_SESSION['USER']['nivel'] ." AND p.id = m.posicao AND m.menu = ". $_SESSION['MENU']['id'] ."")['result'];
 			
 			return $modulos;
 		}
@@ -83,7 +83,7 @@ Class uni extends uniData{
 			$unimodel = new DOMDocument('1.0', 'utf-8');
 			// $unimodel->formatOutput = true;
 			libxml_use_internal_errors(true); //TOTALMENTE NECESSÁRIO, ÚTIL DESABILITAR SOMENTE PARA VER ERROS HUMANOS
-			$unimodel->loadHTMLFile(TEMPLATE);
+			$unimodel->loadHTMLFile($_SESSION['TEMPLATE']);
 			//DADOS DO SISTEMA ##### INICIO #####
 			
 			foreach($unimodel->getElementsByTagName('span') as $DOMElement){
@@ -94,6 +94,7 @@ Class uni extends uniData{
 				if((($DOMElement->hasAttribute('class') AND $DOMElement->getAttribute('class')=='logo-lg')? TRUE : FALSE)) 
 					$DOMElement->appendChild(new DOMText(UConfig::$UNomeSufixo));
 			}
+			
 			//falta breadcrumbs e similares
 			
 			//DADOS DO SISTEMA ##### FIM
@@ -102,13 +103,13 @@ Class uni extends uniData{
 			//DADOS DO USUARIO ##### INICIO #####
 			
 			foreach($unimodel->getElementsByTagName('p') as $DOMElement){
-				if((($DOMElement->hasAttribute('class') AND $DOMElement->getAttribute('class')=='logedusername')? TRUE : FALSE)) $DOMElement->appendChild(new DOMText(USER['nome']));
-				if((($DOMElement->hasAttribute('class') AND $DOMElement->getAttribute('class')=='logeduserpro')? TRUE : FALSE)) $DOMElement->appendChild(new DOMText(USER['profissao']));
+				if((($DOMElement->hasAttribute('class') AND $DOMElement->getAttribute('class')=='logedusername')? TRUE : FALSE)) $DOMElement->appendChild(new DOMText($_SESSION['USER']['nome']));
+				if((($DOMElement->hasAttribute('class') AND $DOMElement->getAttribute('class')=='logeduserpro')? TRUE : FALSE)) $DOMElement->appendChild(new DOMText($_SESSION['USER']['profissao']));
 			}
 			
 			foreach($unimodel->getElementsByTagName('span') as $DOMElement){
-				if((($DOMElement->hasAttribute('class') AND $DOMElement->getAttribute('class')=='logedusername')? TRUE : FALSE)) $DOMElement->appendChild(new DOMText(USER['nome']));
-				if((($DOMElement->hasAttribute('class') AND $DOMElement->getAttribute('class')=='logedusercargo')? TRUE : FALSE)) $DOMElement->appendChild(new DOMText(USER['cargo']));
+				if((($DOMElement->hasAttribute('class') AND $DOMElement->getAttribute('class')=='logedusername')? TRUE : FALSE)) $DOMElement->appendChild(new DOMText($_SESSION['USER']['nome']));
+				if((($DOMElement->hasAttribute('class') AND $DOMElement->getAttribute('class')=='logedusercargo')? TRUE : FALSE)) $DOMElement->appendChild(new DOMText($_SESSION['USER']['cargo']));
 			}
 			
 			//DADOS DO USUARIO ##### FIM
@@ -124,7 +125,7 @@ Class uni extends uniData{
 			foreach( $this->Menu() as $componente=>$menus){
 				$menu['capsula'] = $unimenu->appendChild(new DOMElement('li', ''));
 				$menu['capsula'] ->setAttribute('class', '');
-			
+				
 				$menu['a'] = $menu['capsula']->appendChild(new DOMElement('a', ''));
 				$menu['a']->setAttribute('href','#');
 				$menu['i'] = $menu['a']->appendChild(new DOMElement('i', ''));
@@ -161,7 +162,7 @@ Class uni extends uniData{
 			$modulos = $this->Modulos();
 			
 			foreach($modulos as $value){
-				$construct=$this->modMaze(COMPONENTE, "_MODULES", $value['modulo']);
+				$construct=$this->modMaze($_SESSION['COMPONENTE'], "_MODULES", $value['modulo']);
 				// echo " # ".$value['modulo']." # "; //para testes
 				$modelotemp= new DOMDocument();
 				$modelotemp->loadHTML($construct);
@@ -181,20 +182,17 @@ Class uni extends uniData{
 	function execLogin($login, $password){
 		$execLogin = $this->execQuery("SELECT * FROM ". UConfig::$UDB_Prefixo ."contadeusuario WHERE email='$login' AND password='".hash(UConfig::$UHash_algo, $password)."'");
 		if($execLogin['status']){
-			if($execLogin['numRows'] == 1){
-				$id = $execLogin["result"][0]["id"];	$sessionid = hash(hash_algos()[mt_rand(0, 45)], mt_rand());
-				$this->execQuery("UPDATE ". UConfig::$UDB_Prefixo ."contadeusuario SET sessionid = '$sessionid' , sessiondatetime = now() WHERE id=$id");
-				setcookie('unidan', "$sessionid", time() + UConfig::$USessaoTempo, UNIPATH,$_SERVER['SERVER_NAME']);
-					return $sessionid; //ok
+			if($execLogin['numRows'] == 1){ //evitando problemas
+				$id = $execLogin["result"][0]["id"];
+				$_SESSION['SESSION'] = hash(hash_algos()[mt_rand(0, 45)], mt_rand());;
+				$this->execQuery("UPDATE ". UConfig::$UDB_Prefixo ."contadeusuario SET sessionid = '".$_SESSION['SESSION']."' , sessiondatetime = now() WHERE id=$id");
+				return $_SESSION['SESSION']; //ok
 			}else{ return NULL;} //senha ou email incorretos
 		}else{ return "INTERNAL FAIL";} //erro interno
 	}
 	
 	function execLogout(){
-		$this->execQuery("UPDATE ". UConfig::$UDB_Prefixo ."contadeusuario SET sessionid = '' WHERE sessionid = '". $_COOKIE['unidan'] ."'");
-		setcookie('unidan', '', time() - 3600);
-		
-		// empty sessionid e todos os seus rastros
+		$this->execQuery("UPDATE ". UConfig::$UDB_Prefixo ."contadeusuario SET sessionid = '' WHERE sessionid = '". $_SESSION['SESSION'] ."'");
 	}
 	
 	function createUser($nome, $email, $CPF, $senha, $confirma, $acl, $nivel, $img=""){
